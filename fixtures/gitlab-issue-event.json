@@ -1,0 +1,110 @@
+{
+  "object_kind": "issue",
+  "user": {
+    "name": "Matias Piipari",
+    "username": "mz2",
+    "avatar_url": "https://secure.gravatar.com/avatar/e16e6e49ebd35a14a5e091ab67e538bc?s=80&d=identicon"
+  },
+  "project": {
+    "id": 4936211,
+    "name": "manuscripts-api",
+    "description": "Manuscripts API server",
+    "web_url": "https://gitlab.com/mpapp-private/manuscripts-api",
+    "avatar_url": null,
+    "git_ssh_url": "git@gitlab.com:mpapp-private/manuscripts-api.git",
+    "git_http_url": "https://gitlab.com/mpapp-private/manuscripts-api.git",
+    "namespace": "Manuscripts.app Private",
+    "visibility_level": 0,
+    "path_with_namespace": "mpapp-private/manuscripts-api",
+    "default_branch": "master",
+    "ci_config_path": "",
+    "homepage": "https://gitlab.com/mpapp-private/manuscripts-api",
+    "url": "git@gitlab.com:mpapp-private/manuscripts-api.git",
+    "ssh_url": "git@gitlab.com:mpapp-private/manuscripts-api.git",
+    "http_url": "https://gitlab.com/mpapp-private/manuscripts-api.git"
+  },
+  "object_attributes": {
+    "author_id": 918700,
+    "closed_at": "2018-01-14T12:39:43.639Z",
+    "confidential": false,
+    "created_at": "2017-12-19T14:44:24.191Z",
+    "description": "- [x] Build\n- [x] Linting\n- [x] All available tests\n- [x] Coverage analysis for tests (istanbul or jest)\n",
+    "due_date": null,
+    "id": 8277032,
+    "iid": 1,
+    "last_edited_at": "2018-01-14T12:39:41.689Z",
+    "last_edited_by_id": 918700,
+    "milestone_id": null,
+    "moved_to_id": null,
+    "project_id": 4936211,
+    "relative_position": 1073742323,
+    "state": "closed",
+    "time_estimate": 0,
+    "title": "Create CI configuration for the project.",
+    "updated_at": "2018-01-14T12:39:43.645Z",
+    "updated_by_id": 918700,
+    "url": "https://gitlab.com/mpapp-private/manuscripts-api/issues/1",
+    "total_time_spent": 0,
+    "human_total_time_spent": null,
+    "human_time_estimate": null,
+    "assignee_ids": [1852863],
+    "assignee_id": 1852863
+  },
+  "labels": [
+    {
+      "id": 3198431,
+      "title": "in development",
+      "color": "#5CB85C",
+      "project_id": 4936211,
+      "created_at": "2017-12-19T14:44:46.219Z",
+      "updated_at": "2018-02-06T09:56:41.951Z",
+      "template": false,
+      "description": "",
+      "type": "ProjectLabel",
+      "group_id": null
+    }
+  ],
+  "changes": {
+    "assignees": {
+      "previous": [ ],
+      "current": [
+        {
+          "name": "Abdallah",
+          "username": "abarmawi",
+          "avatar_url": "https://secure.gravatar.com/avatar/ea91bc421950a6c88ab8f3ea647f62f4?s=80&d=identicon"
+        }
+      ]
+    },
+    "labels": {
+      "previous": [ ],
+      "current": [
+        {
+          "id": 3198431,
+          "title": "in development",
+          "color": "#5CB85C",
+          "project_id": 4936211,
+          "created_at": "2017-12-19T14:44:46.219Z",
+          "updated_at": "2018-02-06T09:56:41.951Z",
+          "template": false,
+          "description": "",
+          "type": "ProjectLabel",
+          "group_id": null
+        }
+      ]
+    },
+    "total_time_spent": { "previous": null, "current": 0 }
+  },
+  "repository": {
+    "name": "manuscripts-api",
+    "url": "git@gitlab.com:mpapp-private/manuscripts-api.git",
+    "description": "Manuscripts API server",
+    "homepage": "https://gitlab.com/mpapp-private/manuscripts-api"
+  },
+  "assignees": [
+    {
+      "name": "Abdallah",
+      "username": "abarmawi",
+      "avatar_url": "https://secure.gravatar.com/avatar/ea91bc421950a6c88ab8f3ea647f62f4?s=80&d=identicon"
+    }
+  ]
+}
