@@ -70,3 +70,7 @@ pub struct RepositoryPayload {
     pub description: String,
     pub homepage: String
 }
+
+pub struct GitlabTokens {
+    pub acceptable_tokens: Vec<String>
+}
