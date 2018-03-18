@@ -1,4 +1,4 @@
 #[derive(Serialize, Deserialize, Debug)]
-pub struct TextMessagePayload {
+pub struct TextMessage {
     pub text: String 
 }

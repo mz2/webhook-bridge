@@ -8,9 +8,9 @@ pub struct WebhookPayload {
 
 #[derive(Deserialize, Debug)]
 pub struct UserPayload {
-    name: String,
-    username: String,
-    avatar_url: Option<String>
+    pub name: String,
+    pub username: String,
+    pub avatar_url: Option<String>
 }
 
 #[derive(Deserialize, Debug)]
@@ -28,6 +28,7 @@ pub struct ProjectPayload {
 #[derive(Deserialize, Debug)]
 pub struct ObjectAttributesPayload {
     pub author_id: i64,
+    pub iid: i64,
     pub state: String,
     pub title: String
 }
