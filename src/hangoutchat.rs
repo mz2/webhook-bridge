@@ -5,6 +5,7 @@ pub struct Message {
 }
 
 #[derive(Serialize, Deserialize, Debug)]
+#[allow(non_snake_case)]
 pub struct Sender {
     pub name: Option<String>,
     pub displayName: Option<String>,
@@ -39,7 +40,7 @@ impl MessageSender {
         req.headers_mut().set(ContentType::json());
         req.headers_mut().set(ContentLength(outgoing_msg.len() as u64));
 
-        println!("Outgoing message: {}", outgoing_msg);
+        println!("Outgoing message: {}", serde_json::to_string_pretty(&outgoing_msg_payload).unwrap());
         
         req.set_body(outgoing_msg);
 

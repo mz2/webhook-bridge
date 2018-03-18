@@ -30,7 +30,8 @@ pub struct ObjectAttributesPayload {
     pub author_id: i64,
     pub iid: i64,
     pub state: String,
-    pub title: String
+    pub title: String,
+    pub url: String
 }
 
 #[derive(Deserialize, Debug)]
