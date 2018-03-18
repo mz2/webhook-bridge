@@ -1,6 +1,15 @@
 #[derive(Serialize, Deserialize, Debug)]
-pub struct TextMessage {
-    pub text: String 
+pub struct Message {
+    pub text: String,
+    pub sender: Sender
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct Sender {
+    pub name: Option<String>,
+    pub displayName: Option<String>,
+    pub avatarUrl: Option<String>,
+    pub email: Option<String>
 }
 
 use hyper::{Client, Request, Method, Uri};
@@ -12,18 +21,18 @@ use tokio_core::reactor::Core;
 use serde_json;
 use num_cpus;
 
-pub struct Sender {
+pub struct MessageSender {
     pub space: String,
     pub key: String,
     pub token: String
 }
 
-impl Sender {
+impl MessageSender {
     fn url(&self) -> Uri {
         return format!("https://chat.googleapis.com/v1/spaces/{}/messages?key={}&token={}", self.space, self.key, self.token).parse().unwrap();
     }
     
-    pub fn send(&self, outgoing_msg_payload: TextMessage) {
+    pub fn send(&self, outgoing_msg_payload: Message) {
         let outgoing_msg = serde_json::to_string(&outgoing_msg_payload).unwrap();
         let mut req = Request::new(Method::Post, self.url());
 
