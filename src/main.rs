@@ -14,10 +14,18 @@ extern crate rocket_contrib;
 use rocket_contrib::Json;
 
 mod gitlab;
+mod hangoutchat;
 
 #[post("/gitlab/webhook", format = "application/json", data = "<payload>")]
-fn hello(payload: Json<gitlab::WebhookPayload>) -> String {
-    format!("Hello, {} year old named", payload.object_kind)
+fn hello(payload: Json<gitlab::WebhookPayload>) -> Json<hangoutchat::TextMessagePayload> {
+    let msg = payload.into_inner();
+    match msg.object_kind.as_ref() {
+        "issue" => println!("Issue: {}", msg.object_kind),
+        _ => println!("Unexpected payload type: ${:?}", msg),
+    }
+
+    let outgoing_msg = hangoutchat::TextMessagePayload { text: "foo".to_string() };
+    return Json(outgoing_msg);
 }
 
 fn main() {
