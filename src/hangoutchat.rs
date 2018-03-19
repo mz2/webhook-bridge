@@ -1,7 +1,7 @@
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Message {
     pub text: String,
-    pub sender: Sender
+    pub sender: Option<Sender>
 }
 
 #[derive(Serialize, Deserialize, Debug)]

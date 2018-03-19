@@ -1,5 +1,5 @@
 
-pub fn gitlab_webhook_to_hangout_message(payload: ::gitlab::WebhookPayload) -> ::hangoutchat::Message {
+pub fn gitlab_issue_to_hangout_message(payload: ::gitlab::WebhookIssuePayload) -> ::hangoutchat::Message {
     let prev_assignees: Vec<String> = payload.changes.assignees.previous.iter().map({ |ref x| format!("@{}", x.username) }).collect();
     let current_assignees: Vec<String> = payload.changes.assignees.current.iter().map({ |ref x| format!("@{}", x.username) }).collect();
     
@@ -19,7 +19,14 @@ pub fn gitlab_webhook_to_hangout_message(payload: ::gitlab::WebhookPayload) -> :
         avatarUrl: match avatared_assignee { Some(ref x) => x.avatar_url.clone(), None => Option::None }, 
         email: Option::None
     };
-    let msg = ::hangoutchat::Message { text: txt, sender: sender };
+    let msg = ::hangoutchat::Message { text: txt, sender: Some(sender) };
+    return msg;
+}
+
+pub fn gitlab_pipeline_event_to_hangout_message(payload: ::gitlab::WebhookPipelineEventPayload) -> ::hangoutchat::Message {
+    let txt = format!("*Pipeline {}* for *<{}|{}>* <{}|{}>", 
+                      payload.object_attributes.status, payload.project.web_url, payload.project.name, payload.commit.url, payload.commit.message);
+    let msg = ::hangoutchat::Message { text: txt, sender: Option::None };
     return msg;
 }
 
@@ -32,22 +39,22 @@ mod tests {
     use super::*;
 
     #[test]
-    fn gitlab_issue_to_hangout_message() {
+    fn test_issue_to_hangout_message_conversion() {
         let mut file = File::open("./fixtures/gitlab-issue-event.json").unwrap();
         let mut data = String::new();
         file.read_to_string(&mut data).unwrap();
-        let webhook: gitlab::WebhookPayload = serde_json::from_str(&data).unwrap();
-        let msg = gitlab_webhook_to_hangout_message(webhook);
+        let webhook: gitlab::WebhookIssuePayload = serde_json::from_str(&data).unwrap();
+        let msg = gitlab_issue_to_hangout_message(webhook);
         assert_eq!(msg.text, "<https://gitlab.com/mpapp-private/manuscripts-api/issues/1|*manuscripts-api* #1 (\"Create CI configuration for the project.\")> assigneed to *_@abarmawi_*.");
     }
 
     #[test]
-    fn gitlab_pipeline_event_to_hangout_message() {
+    fn test_pipeline_event_to_hangout_message_conversion() {
         let mut file = File::open("./fixtures/gitlab-pipeline-event.json").unwrap();
         let mut data = String::new();
         file.read_to_string(&mut data).unwrap();
-        let webhook: gitlab::WebhookPayload = serde_json::from_str(&data).unwrap();
-        let msg = gitlab_webhook_to_hangout_message(webhook);
-        assert_eq!(msg.text, "<https://gitlab.com/mpapp-private/manuscripts-api/issues/1|*manuscripts-api* #1 (\"Create CI configuration for the project.\")> assigneed to *_@abarmawi_*.");
+        let webhook: gitlab::WebhookPipelineEventPayload = serde_json::from_str(&data).unwrap();
+        let msg = gitlab_pipeline_event_to_hangout_message(webhook);
+        assert_eq!(msg.text, "*Pipeline failed* for *<https://gitlab.com/mpapp-private/manuscripts-api|manuscripts-api>* <https://gitlab.com/mpapp-private/manuscripts-api/commit/19c4e55aea4773b1dafd7c34e326a19448160e9c|A potentially functional first stab at docker-in-docker running of tests?\n>");
     }
 }

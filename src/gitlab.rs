@@ -4,11 +4,20 @@ use rocket::http::Status;
 use rocket::{Request};
 
 #[derive(Deserialize, Debug)]
-pub struct WebhookPayload {
+pub struct WebhookIssuePayload {
     pub object_kind: String,
     pub project: ProjectPayload,
-    pub object_attributes: ObjectAttributesPayload,
+    pub object_attributes: IssueAttributesPayload,
     pub changes: ChangesPayload
+}
+
+#[derive(Deserialize, Debug)]
+pub struct WebhookPipelineEventPayload {
+    pub user: UserPayload,
+    pub object_attributes: PipelineEventAttributesPayload,
+    pub project: ProjectPayload,
+    pub commit: CommitPayload,
+    pub builds: Vec<BuildPayload>
 }
 
 #[derive(Deserialize, Debug)]
@@ -27,16 +36,71 @@ pub struct ProjectPayload {
     pub avatar_url: Option<String>,
     pub git_http_url: String,
     pub namespace: String,
-    pub homepage: String
+    pub homepage: Option<String>
 }
 
 #[derive(Deserialize, Debug)]
-pub struct ObjectAttributesPayload {
+pub struct IssueAttributesPayload {
     pub author_id: i64,
     pub iid: i64,
     pub state: String,
     pub title: String,
     pub url: String
+}
+
+#[derive(Deserialize, Debug)]
+pub struct AuthorPayload {
+    pub name: String,
+    pub email: String
+}
+
+#[derive(Deserialize, Debug)]
+pub struct CommitPayload {
+    pub id: String,
+    pub message: String,
+    pub url: String,
+    pub author: AuthorPayload
+}
+
+#[derive(Deserialize, Debug)]
+pub struct BuildPayload {
+    id: i64,
+    stage: String,
+    name: String,
+    status: String,
+    when: String,
+    manual: bool,
+    user: UserPayload,
+    runner: RunnerPayload,
+    artifacts_file: Option<ArtifactsPayload>
+}
+
+#[derive(Deserialize, Debug)]
+pub struct ArtifactsPayload {
+    filename: Option<String>,
+    size: i64
+}
+
+#[derive(Deserialize, Debug)]
+pub struct RunnerPayload {
+    pub id: i64,
+    pub description: String,
+    pub active: bool,
+    pub is_shared: bool
+}
+
+#[derive(Deserialize, Debug)]
+pub struct PipelineEventAttributesPayload {
+    pub id: i64,
+    #[serde(rename="ref")]
+    pub git_ref: String,
+    pub tag: bool,
+    pub sha: String,
+    pub before_sha: String,
+    pub status: String,
+    pub detailed_status: String,
+    pub stages: Vec<String>,
+    pub duration: i64
 }
 
 #[derive(Deserialize, Debug)]
@@ -73,7 +137,7 @@ pub struct RepositoryPayload {
     pub name: String,
     pub url: String,
     pub description: String,
-    pub homepage: String
+    pub homepage: Option<String>
 }
 
 pub struct GitLabEventType {
