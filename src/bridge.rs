@@ -40,4 +40,14 @@ mod tests {
         let msg = gitlab_webhook_to_hangout_message(webhook);
         assert_eq!(msg.text, "<https://gitlab.com/mpapp-private/manuscripts-api/issues/1|*manuscripts-api* #1 (\"Create CI configuration for the project.\")> assigneed to *_@abarmawi_*.");
     }
+
+    #[test]
+    fn gitlab_pipeline_event_to_hangout_message() {
+        let mut file = File::open("./fixtures/gitlab-pipeline-event.json").unwrap();
+        let mut data = String::new();
+        file.read_to_string(&mut data).unwrap();
+        let webhook: gitlab::WebhookPayload = serde_json::from_str(&data).unwrap();
+        let msg = gitlab_webhook_to_hangout_message(webhook);
+        assert_eq!(msg.text, "<https://gitlab.com/mpapp-private/manuscripts-api/issues/1|*manuscripts-api* #1 (\"Create CI configuration for the project.\")> assigneed to *_@abarmawi_*.");
+    }
 }

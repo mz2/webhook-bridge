@@ -1,0 +1,67 @@
+{
+  "object_kind": "pipeline",
+  "object_attributes": {
+    "id": 15783113,
+    "ref": "1-create-ci-configuration-for-the-project",
+    "tag": false,
+    "sha": "19c4e55aea4773b1dafd7c34e326a19448160e9c",
+    "before_sha": "03a647f6912f7b8d307b270060afdd0950dd7b3b",
+    "status": "failed",
+    "detailed_status": "failed",
+    "stages": ["build"],
+    "created_at": "2018-01-04T13:45:07.691Z",
+    "finished_at": "2018-01-04T13:46:22.341Z",
+    "duration": 70
+  },
+  "user": {
+    "name": "Matias Piipari",
+    "username": "mz2",
+    "avatar_url": "https://secure.gravatar.com/avatar/e16e6e49ebd35a14a5e091ab67e538bc?s=80&d=identicon"
+  },
+  "project": {
+    "id": 4936211,
+    "name": "manuscripts-api",
+    "description": "Manuscripts API server",
+    "web_url": "https://gitlab.com/mpapp-private/manuscripts-api",
+    "avatar_url": null,
+    "git_ssh_url": "git@gitlab.com:mpapp-private/manuscripts-api.git",
+    "git_http_url": "https://gitlab.com/mpapp-private/manuscripts-api.git",
+    "namespace": "Manuscripts.app Private",
+    "visibility_level": 0,
+    "path_with_namespace": "mpapp-private/manuscripts-api",
+    "default_branch": "master",
+    "ci_config_path": ""
+  },
+  "commit": {
+    "id": "19c4e55aea4773b1dafd7c34e326a19448160e9c",
+    "message": "A potentially functional first stab at docker-in-docker running of tests?\n",
+    "timestamp": "2018-01-04T13:44:55+00:00",
+    "url": "https://gitlab.com/mpapp-private/manuscripts-api/commit/19c4e55aea4773b1dafd7c34e326a19448160e9c",
+    "author": { "name": "Matias Piipari", "email": "matias.piipari@gmail.com" }
+  },
+  "builds": [
+    {
+      "id": 46684853,
+      "stage": "build",
+      "name": "build",
+      "status": "failed",
+      "created_at": "2018-01-04T13:45:07.822Z",
+      "started_at": "2018-01-04T13:45:08.381Z",
+      "finished_at": "2018-01-04T13:46:19.182Z",
+      "when": "on_success",
+      "manual": false,
+      "user": {
+        "name": "Matias Piipari",
+        "username": "mz2",
+        "avatar_url": "https://secure.gravatar.com/avatar/e16e6e49ebd35a14a5e091ab67e538bc?s=80&d=identicon"
+      },
+      "runner": {
+        "id": 40788,
+        "description": "shared-runners-manager-2.gitlab.com",
+        "active": true,
+        "is_shared": true
+      },
+      "artifacts_file": { "filename": null, "size": 0 }
+    }
+  ]
+}

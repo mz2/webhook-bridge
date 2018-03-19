@@ -1,3 +1,8 @@
+use rocket::request::{self , FromRequest};
+use rocket::Outcome::*;
+use rocket::http::Status;
+use rocket::{Request};
+
 #[derive(Deserialize, Debug)]
 pub struct WebhookPayload {
     pub object_kind: String,
@@ -71,6 +76,40 @@ pub struct RepositoryPayload {
     pub homepage: String
 }
 
-pub struct GitlabTokens {
+pub struct GitLabEventType {
+    pub event_type: String
+}
+
+pub struct GitLabTokens {
     pub acceptable_tokens: Vec<String>
+}
+
+pub struct GitLabToken {
+    pub token: String
+}
+
+impl<'a, 'r> FromRequest<'a, 'r> for GitLabToken {
+    type Error = ();
+
+    fn from_request(request: &'a Request<'r>) -> request::Outcome<Self, ()> {
+        match request.headers().get("X-GitLab-Token").next() {
+            Some(token) => {
+                Success(GitLabToken { token: token.to_string() })
+            },
+            None => Failure((Status::BadRequest, ()))
+        }
+    }
+}
+
+impl<'a, 'r> FromRequest<'a, 'r> for GitLabEventType {
+    type Error = ();
+
+    fn from_request(request: &'a Request<'r>) -> request::Outcome<Self, ()> {
+        match request.headers().get("X-GitLab-Event").next() {
+            Some(event_type) => {
+                Success(GitLabEventType { event_type: event_type.to_string() })
+            },
+            None => Failure((Status::BadRequest, ()))
+        }
+    }
 }

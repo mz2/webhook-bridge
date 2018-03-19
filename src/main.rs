@@ -21,7 +21,7 @@ mod router;
 
 use rocket::fairing::AdHoc;
 use hangoutchat::MessageSender;
-use gitlab::GitlabTokens;
+use gitlab::GitLabTokens;
 
 fn main() {
     rocket::ignite()
@@ -36,7 +36,7 @@ fn main() {
                                               .split(",")
                                               .map(|ref x| x.to_string())
                                               .collect();
-                Ok(r.manage(GitlabTokens {acceptable_tokens: gitlab_tokens}))
+                Ok(r.manage(GitLabTokens {acceptable_tokens: gitlab_tokens}))
             }))
             .mount("/", routes![router::convert_gitlab_webhook])
             .launch();
