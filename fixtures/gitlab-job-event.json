@@ -1,0 +1,39 @@
+{
+  "object_kind": "build",
+  "ref": "113-change-the-verify-email-request-from-get-to-post-edit-the-verify-email-link-in-the-sent-email",
+  "tag": false,
+  "before_sha": "d2d5211ab9698a13cda2918b2593c40733ce6ec6",
+  "sha": "e7901a6d7d752124f88078c1f0768897a9325971",
+  "build_id": 58126173,
+  "build_name": "build",
+  "build_stage": "build",
+  "build_status": "running",
+  "build_started_at": "2018-03-19 08:33:26 UTC",
+  "build_finished_at": null,
+  "build_duration": 0.344777028,
+  "build_allow_failure": false,
+  "project_id": 4936211,
+  "project_name": "Manuscripts.app Private / manuscripts-api",
+  "user": { "id": 1852863, "name": "Abdallah", "email": "abarmawi@atypon.com" },
+  "commit": {
+    "id": 19109620,
+    "sha": "e7901a6d7d752124f88078c1f0768897a9325971",
+    "message": "fix faild integration tests\n",
+    "author_name": "Abdallah Al-Barmawi",
+    "author_email": "abarmawi@atypon.com",
+    "author_url": "https://gitlab.com/abarmawi",
+    "status": "pending",
+    "duration": null,
+    "started_at": null,
+    "finished_at": null
+  },
+  "repository": {
+    "name": "manuscripts-api",
+    "url": "git@gitlab.com:mpapp-private/manuscripts-api.git",
+    "description": "Manuscripts API server",
+    "homepage": "https://gitlab.com/mpapp-private/manuscripts-api",
+    "git_http_url": "https://gitlab.com/mpapp-private/manuscripts-api.git",
+    "git_ssh_url": "git@gitlab.com:mpapp-private/manuscripts-api.git",
+    "visibility_level": 0
+  }
+}
