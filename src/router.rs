@@ -14,6 +14,8 @@ fn convert_gitlab_webhook(payload: Json,
                           acceptable_tokens: State<GitLabTokens>, 
                           gitlab_token: GitLabToken,
                           gitlab_event_type: GitLabEventType) -> Result<(), Status> {
+    println("Incoming webhook:\n{}", serde_json::to_string_pretty(payload))
+
     if !["Issue Hook", "Pipeline Hook"].contains(&gitlab_event_type.event_type.as_str()) {
         return Ok(());
     }
