@@ -1,0 +1,125 @@
+{
+  "object_kind": "merge_request",
+  "user": {
+    "name": "Matias Piipari",
+    "username": "mz2",
+    "avatar_url": "https://secure.gravatar.com/avatar/e16e6e49ebd35a14a5e091ab67e538bc?s=80&d=identicon"
+  },
+  "project": {
+    "id": 4936211,
+    "name": "manuscripts-api",
+    "description": "Manuscripts API server",
+    "web_url": "https://gitlab.com/mpapp-private/manuscripts-api",
+    "avatar_url": null,
+    "git_ssh_url": "git@gitlab.com:mpapp-private/manuscripts-api.git",
+    "git_http_url": "https://gitlab.com/mpapp-private/manuscripts-api.git",
+    "namespace": "Manuscripts.app Private",
+    "visibility_level": 0,
+    "path_with_namespace": "mpapp-private/manuscripts-api",
+    "default_branch": "master",
+    "ci_config_path": "",
+    "homepage": "https://gitlab.com/mpapp-private/manuscripts-api",
+    "url": "git@gitlab.com:mpapp-private/manuscripts-api.git",
+    "ssh_url": "git@gitlab.com:mpapp-private/manuscripts-api.git",
+    "http_url": "https://gitlab.com/mpapp-private/manuscripts-api.git"
+  },
+  "object_attributes": {
+    "assignee_id": 1948861,
+    "author_id": 1852863,
+    "created_at": "2018-03-19 08:05:54 UTC",
+    "description": "Please describe the intention of your changes clearly.\n\n- Link to relevant ticket(s).\n- Explain any matters that help a code reviewer delve deeper.\n\nCloses #113",
+    "head_pipeline_id": 19109620,
+    "id": 8471257,
+    "iid": 64,
+    "last_edited_at": "2018-03-19 10:03:00 UTC",
+    "last_edited_by_id": 1852863,
+    "merge_commit_sha": null,
+    "merge_error": null,
+    "merge_params": { },
+    "merge_status": "can_be_merged",
+    "merge_user_id": null,
+    "merge_when_pipeline_succeeds": false,
+    "milestone_id": null,
+    "source_branch": "113-change-the-verify-email-request-from-get-to-post-edit-the-verify-email-link-in-the-sent-email",
+    "source_project_id": 4936211,
+    "state": "opened",
+    "target_branch": "master",
+    "target_project_id": 4936211,
+    "time_estimate": 0,
+    "title": "Resolve \"change the verify email request from `GET` to `POST` & edit the verify email link in the sent email\"",
+    "updated_at": "2018-03-19 10:08:30 UTC",
+    "updated_by_id": 918700,
+    "url": "https://gitlab.com/mpapp-private/manuscripts-api/merge_requests/64",
+    "source": {
+      "id": 4936211,
+      "name": "manuscripts-api",
+      "description": "Manuscripts API server",
+      "web_url": "https://gitlab.com/mpapp-private/manuscripts-api",
+      "avatar_url": null,
+      "git_ssh_url": "git@gitlab.com:mpapp-private/manuscripts-api.git",
+      "git_http_url": "https://gitlab.com/mpapp-private/manuscripts-api.git",
+      "namespace": "Manuscripts.app Private",
+      "visibility_level": 0,
+      "path_with_namespace": "mpapp-private/manuscripts-api",
+      "default_branch": "master",
+      "ci_config_path": "",
+      "homepage": "https://gitlab.com/mpapp-private/manuscripts-api",
+      "url": "git@gitlab.com:mpapp-private/manuscripts-api.git",
+      "ssh_url": "git@gitlab.com:mpapp-private/manuscripts-api.git",
+      "http_url": "https://gitlab.com/mpapp-private/manuscripts-api.git"
+    },
+    "target": {
+      "id": 4936211,
+      "name": "manuscripts-api",
+      "description": "Manuscripts API server",
+      "web_url": "https://gitlab.com/mpapp-private/manuscripts-api",
+      "avatar_url": null,
+      "git_ssh_url": "git@gitlab.com:mpapp-private/manuscripts-api.git",
+      "git_http_url": "https://gitlab.com/mpapp-private/manuscripts-api.git",
+      "namespace": "Manuscripts.app Private",
+      "visibility_level": 0,
+      "path_with_namespace": "mpapp-private/manuscripts-api",
+      "default_branch": "master",
+      "ci_config_path": "",
+      "homepage": "https://gitlab.com/mpapp-private/manuscripts-api",
+      "url": "git@gitlab.com:mpapp-private/manuscripts-api.git",
+      "ssh_url": "git@gitlab.com:mpapp-private/manuscripts-api.git",
+      "http_url": "https://gitlab.com/mpapp-private/manuscripts-api.git"
+    },
+    "last_commit": {
+      "id": "e7901a6d7d752124f88078c1f0768897a9325971",
+      "message": "fix faild integration tests\n",
+      "timestamp": "2018-03-19T10:32:27+02:00",
+      "url": "https://gitlab.com/mpapp-private/manuscripts-api/commit/e7901a6d7d752124f88078c1f0768897a9325971",
+      "author": { "name": "Abdallah Al-Barmawi", "email": "abarmawi@atypon.com" }
+    },
+    "work_in_progress": false,
+    "total_time_spent": 0,
+    "human_total_time_spent": null,
+    "human_time_estimate": null,
+    "action": "approved"
+  },
+  "labels": [ ],
+  "changes": {
+    "assignee": {
+      "previous": null,
+      "current": {
+        "name": "Alf Eaton",
+        "username": "alf-eaton",
+        "avatar_url": "https://assets.gitlab-static.net/uploads/-/system/user/avatar/1948861/avatar.png"
+      }
+    },
+    "total_time_spent": { "previous": null, "current": 0 }
+  },
+  "repository": {
+    "name": "manuscripts-api",
+    "url": "git@gitlab.com:mpapp-private/manuscripts-api.git",
+    "description": "Manuscripts API server",
+    "homepage": "https://gitlab.com/mpapp-private/manuscripts-api"
+  },
+  "assignee": {
+    "name": "Alf Eaton",
+    "username": "alf-eaton",
+    "avatar_url": "https://assets.gitlab-static.net/uploads/-/system/user/avatar/1948861/avatar.png"
+  }
+}

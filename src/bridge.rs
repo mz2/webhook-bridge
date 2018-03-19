@@ -1,5 +1,5 @@
 
-pub fn gitlab_issue_to_hangout_message(payload: ::gitlab::WebhookIssuePayload) -> ::hangoutchat::Message {
+pub fn gitlab_issue_to_hangout_message(payload: ::gitlab::IssuePayload) -> ::hangoutchat::Message {
     let prev_assignees: Vec<String> = payload.changes.assignees.previous.iter().map({ |ref x| format!("@{}", x.username) }).collect();
     let current_assignees: Vec<String> = payload.changes.assignees.current.iter().map({ |ref x| format!("@{}", x.username) }).collect();
     
@@ -23,7 +23,7 @@ pub fn gitlab_issue_to_hangout_message(payload: ::gitlab::WebhookIssuePayload) -
     return msg;
 }
 
-pub fn gitlab_pipeline_event_to_hangout_message(payload: ::gitlab::WebhookPipelineEventPayload) -> ::hangoutchat::Message {
+pub fn gitlab_pipeline_event_to_hangout_message(payload: ::gitlab::PipelineEventPayload) -> ::hangoutchat::Message {
     let mut truncated_sha = payload.commit.id.clone();
     truncated_sha.truncate(12);
     
@@ -41,6 +41,28 @@ pub fn gitlab_pipeline_event_to_hangout_message(payload: ::gitlab::WebhookPipeli
     return msg;
 }
 
+pub fn gitlab_merge_request_event_to_hangout_message(payload: ::gitlab::MergeRequestEventPayload) -> ::hangoutchat::Message {
+    let prev_assignee_exists = payload.changes.assignee.previous.is_some();
+    let current_assignee_exists = payload.changes.assignee.current.is_some();
+
+    let txt = match (prev_assignee_exists, current_assignee_exists) {
+        (prev_assignee_exists, current_assignee_exists) if !prev_assignee_exists && current_assignee_exists => { 
+            format!("<{}|{} #*{}*> assigneed to *_{}_*.\n{}", 
+                    payload.object_attributes.url,
+                    payload.project.name,
+                    payload.object_attributes.iid,
+                    payload.assignee.username,
+                    payload.object_attributes.title)
+        }
+        _ => {
+            format!("*Merge request {}* ({}): ", payload.object_attributes.iid, payload.object_attributes.title)
+        }
+    };
+
+    let msg = ::hangoutchat::Message { text: txt, sender: Option::None };
+    return msg;
+}
+
 #[cfg(test)]
 mod tests {
     use ::serde_json;
@@ -54,7 +76,7 @@ mod tests {
         let mut file = File::open("./fixtures/gitlab-issue-event.json").unwrap();
         let mut data = String::new();
         file.read_to_string(&mut data).unwrap();
-        let webhook: gitlab::WebhookIssuePayload = serde_json::from_str(&data).unwrap();
+        let webhook: gitlab::IssuePayload = serde_json::from_str(&data).unwrap();
         let msg = gitlab_issue_to_hangout_message(webhook);
         assert_eq!(msg.text, "<https://gitlab.com/mpapp-private/manuscripts-api/issues/1|*manuscripts-api* #1 (\"Create CI configuration for the project.\")> assigneed to *_@abarmawi_*.");
     }
@@ -64,7 +86,17 @@ mod tests {
         let mut file = File::open("./fixtures/gitlab-pipeline-event.json").unwrap();
         let mut data = String::new();
         file.read_to_string(&mut data).unwrap();
-        let webhook: gitlab::WebhookPipelineEventPayload = serde_json::from_str(&data).unwrap();
+        let webhook: gitlab::PipelineEventPayload = serde_json::from_str(&data).unwrap();
+        let msg = gitlab_pipeline_event_to_hangout_message(webhook);
+        assert_eq!(msg.text, "*Pipeline failed* for *<https://gitlab.com/mpapp-private/manuscripts-api|manuscripts-api>* <https://gitlab.com/mpapp-private/manuscripts-api/commit/19c4e55aea4773b1dafd7c34e326a19448160e9c|A potentially functional first stab at docker-in-docker running of tests?\n>");
+    }
+
+    #[test]
+    fn test_merge_request_event_to_hangout_message_conversion() {
+        let mut file = File::open("./fixtures/gitlab-merge-request-event.json").unwrap();
+        let mut data = String::new();
+        file.read_to_string(&mut data).unwrap();
+        let webhook: gitlab::PipelineEventPayload = serde_json::from_str(&data).unwrap();
         let msg = gitlab_pipeline_event_to_hangout_message(webhook);
         assert_eq!(msg.text, "*Pipeline failed* for *<https://gitlab.com/mpapp-private/manuscripts-api|manuscripts-api>* <https://gitlab.com/mpapp-private/manuscripts-api/commit/19c4e55aea4773b1dafd7c34e326a19448160e9c|A potentially functional first stab at docker-in-docker running of tests?\n>");
     }

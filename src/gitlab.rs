@@ -4,7 +4,7 @@ use rocket::http::Status;
 use rocket::{Request};
 
 #[derive(Deserialize, Debug)]
-pub struct WebhookIssuePayload {
+pub struct IssuePayload {
     pub object_kind: String,
     pub project: ProjectPayload,
     pub object_attributes: IssueAttributesPayload,
@@ -12,12 +12,29 @@ pub struct WebhookIssuePayload {
 }
 
 #[derive(Deserialize, Debug)]
-pub struct WebhookPipelineEventPayload {
+pub struct PipelineEventPayload {
     pub user: UserPayload,
     pub object_attributes: PipelineEventAttributesPayload,
     pub project: ProjectPayload,
     pub commit: CommitPayload,
     pub builds: Vec<BuildPayload>
+}
+
+#[derive(Deserialize, Debug)]
+pub struct MergeRequestEventPayload {
+    pub user: UserPayload,
+    pub project: ProjectPayload,
+    pub object_attributes: MergeRequestAttributesPayload,
+    pub changes: MergeRequestChangesPayload,
+    pub repository: RepositoryPayload,
+    pub assignee: AssigneePayload
+}
+
+#[derive(Deserialize, Debug)]
+pub struct AssigneePayload {
+    pub name: String,
+    pub username: String,
+    pub avatar_url: String
 }
 
 #[derive(Deserialize, Debug)]
@@ -46,6 +63,37 @@ pub struct IssueAttributesPayload {
     pub state: String,
     pub title: String,
     pub url: String
+}
+
+#[derive(Deserialize, Debug)]
+pub struct MergeRequestAttributesPayload {
+    pub assignee_id: i64,
+    pub author_id: i64,
+    pub description: String,
+    pub head_pipeline_id: i64,
+    pub id: i64,
+    pub iid: i64,
+    pub last_edited_by_id: i64,
+    pub merge_commit_sha: Option<String>,
+    pub merge_error: Option<String>,
+    pub merge_status: String,
+    pub merge_user_id: Option<i64>,
+    pub merge_when_pipeline_succeeds: bool,
+    pub source_branch: String,
+    pub source_project_id: i64,
+    pub state: String,
+    pub target_branch: String,
+    pub target_project_id: i64,
+    pub time_estimate: i64,
+    pub title: String,
+    pub updated_by_id: i64,
+    pub url: String,
+    pub source: ProjectPayload,
+    pub target: ProjectPayload,
+    pub last_commit: CommitPayload,
+    pub work_in_progress: bool,
+    pub total_time_spent: i64,
+    pub action: String
 }
 
 #[derive(Deserialize, Debug)]
@@ -107,6 +155,17 @@ pub struct PipelineEventAttributesPayload {
 pub struct ChangesPayload {
     pub assignees: AssigneesPayload,
     pub labels: LabelsPayload
+}
+
+#[derive(Deserialize, Debug)]
+pub struct MergeRequestChangesPayload {
+    pub assignee: MergeRequestAssigneeChangePayload
+}
+
+#[derive(Deserialize, Debug)]
+pub struct MergeRequestAssigneeChangePayload {
+    pub current: Option<AssigneePayload>,
+    pub previous: Option<AssigneePayload>
 }
 
 #[derive(Deserialize, Debug)]
