@@ -25,7 +25,7 @@ pub fn gitlab_issue_to_hangout_message(payload: ::gitlab::WebhookIssuePayload) -
 
 pub fn gitlab_pipeline_event_to_hangout_message(payload: ::gitlab::WebhookPipelineEventPayload) -> ::hangoutchat::Message {
     let txt = format!("*Pipeline {}* for *<{}|{}>* <{}|{}>", 
-                      payload.object_attributes.status, payload.project.web_url, payload.project.name, payload.commit.url, payload.commit.message);
+                      payload.object_attributes.status, payload.project.web_url, payload.project.name, payload.commit.url, payload.commit.sha);
     let msg = ::hangoutchat::Message { text: txt, sender: Option::None };
     return msg;
 }
