@@ -153,19 +153,26 @@ pub struct PipelineEventAttributesPayload {
 
 #[derive(Deserialize, Debug)]
 pub struct ChangesPayload {
-    pub assignees: AssigneesPayload,
+    pub assignees: Option<AssigneesPayload>,
     pub labels: LabelsPayload
 }
 
 #[derive(Deserialize, Debug)]
 pub struct MergeRequestChangesPayload {
-    pub assignee: MergeRequestAssigneeChangePayload
+    pub assignee: Option<MergeRequestAssigneeChangePayload>,
+    pub title: Option<MergeRequestTitleChangePayload>
 }
 
 #[derive(Deserialize, Debug)]
 pub struct MergeRequestAssigneeChangePayload {
     pub current: Option<AssigneePayload>,
     pub previous: Option<AssigneePayload>
+}
+
+#[derive(Deserialize, Debug)]
+pub struct MergeRequestTitleChangePayload {
+    pub previous: String,
+    pub current: String
 }
 
 #[derive(Deserialize, Debug)]
